@@ -134,10 +134,6 @@ export default class EditIncome extends Component {
           
           <button className='btn'>Simpan</button>
         </form>
-
-        <div className='mt-3'>
-          <pre>{JSON.stringify(this.state, null, 3)}</pre>
-        </div>
       </Fragment>
     );
         }
