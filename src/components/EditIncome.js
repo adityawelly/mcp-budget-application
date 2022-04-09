@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import Input from './form-components/input';
+import '../App.css';
 
 export default class EditIncome extends Component {
   // state = {
@@ -112,39 +113,25 @@ export default class EditIncome extends Component {
 
     return(
       <Fragment>
-        <h2>Add/Edit income</h2>
-        <hr />
+        <h1>Add / Edit Income</h1>
         <form onSubmit={this.handleSubmit}>
           <input type="hidden" name='id' id='id' value={income.id} onChange={this.handleChange}/>
+          
+          <div className='textbox'>
+            <label>Tanggal</label>
+            <Input type={'date'} name={'tanggal_in'} value={income.tanggal_in} handleChange={this.handleChange} />
+          </div>
+          
+          <div className='textbox'>
+            <label>Jumlah</label>
+            <Input type={'text'} name={'jumlah_in'} value={income.jumlah_in} handleChange={this.handleChange} />
+          </div>
 
-          {/* <div className='mb-3'>
-            <label htmlFor='tanggal_in' className='form-label'>
-              Tanggal
-            </label>
-            <input type='text' className='form-control' id='tanggal_in' name='tanggal_in' value={income.tanggal_in} onChange={this.handleChange}/>
-          </div> */}
-
-          <Input title={"Tanggal"} type={'date'} name={'tanggal_in'} value={income.tanggal_in} handleChange={this.handleChange} />
-
-          {/* <div className='mb-3'>
-            <label htmlFor='jumlah_in' className='form-label'>
-              Jumlah
-            </label>
-            <input type='text' className='form-control' id='jumlah_in' name='jumlah_in' value={income.jumlah_in} onChange={this.handleChange}/>
-          </div> */}
-
-          <Input title={"Jumlah"} type={'text'} name={'jumlah_in'} value={income.jumlah_in} handleChange={this.handleChange} />
-
-          {/* <div className='mb-3'>
-            <label htmlFor='catatan_in' className='form-label'>
-              Catatan
-            </label>
-            <input type='text' className='form-control' id='catatan_in' name='catatan_in' value={income.catatan_in} onChange={this.handleChange}/>
-          </div> */}
-
-          <Input title={"Catatan"} type={'text'} name={'catatan_in'} value={income.catatan_in} handleChange={this.handleChange} />
-
-          <hr />
+          <div className='textbox'>
+            <label>Catatan</label>
+            <Input type={'text'} name={'catatan_in'} value={income.catatan_in} handleChange={this.handleChange} />
+          </div>
+          
           <button className='btn'>Simpan</button>
         </form>
 

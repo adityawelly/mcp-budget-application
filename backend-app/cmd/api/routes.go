@@ -14,6 +14,6 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodGet, "/v1/income/:id", app.getOneIncome)
 	router.HandlerFunc(http.MethodGet, "/v1/income", app.getAllIncome)
 
-	// router.HandlerFunc(http.MethodPost, "/v1/income/editincome", app.editincome)
+	router.HandlerFunc(http.MethodPost, "/v1/income/editincome", app.editincome)
 	return app.enableCORS(router)
 }

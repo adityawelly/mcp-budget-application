@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import '../App.css';
 
 export default class EditExpenses extends Component {
   state = {
@@ -21,7 +22,7 @@ export default class EditExpenses extends Component {
 
     return(
       <Fragment>
-        <h2>Add/Edit Expenses</h2>
+        <h1>Add/Edit Expenses</h1>
         <hr />
         <form method='post'>
 

@@ -69,8 +69,20 @@ func (app *application) insertIncome(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (app *application) updateIncome(w http.ResponseWriter, r *http.Request) {
+func (app *application) editincome(w http.ResponseWriter, r *http.Request) {
+	type jsonResp struct {
+		OK bool `json:"ok"`
+	}
 
+	ok := jsonResp{
+		OK: true,
+	}
+
+	err := app.writeJSON(w, http.StatusOK, ok, "response")
+	if err != nil {
+		app.errorJSON(w, err)
+		return
+	}
 }
 
 func (app *application) searchIncome(w http.ResponseWriter, r *http.Request) {
