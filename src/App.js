@@ -12,11 +12,11 @@ export default function App() {
   return (
     <Router>
       <nav>
-        <label class="logo"> BudgetX </label>
+        <label className='logo'> BudgetX </label>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/income/income/0">Income</Link></li>
-          <li><Link to="/expenses/add">Expenses</Link></li>
+          <li><Link to="/expenses/expenses/0">Expenses</Link></li>
           <li><Link to="/login">Login</Link></li>
         </ul>
       </nav>
@@ -24,7 +24,7 @@ export default function App() {
       <div className='box'>
         <Switch>
           <Route path="/income/income/:id" component={EditIncome} />
-          <Route path="/expenses/add" component={EditExpenses} />
+          <Route path="/expenses/expenses/:id" component={EditExpenses} />
           <Route path="/"><Home /></Route>
         </Switch>
       </div>

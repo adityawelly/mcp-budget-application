@@ -27,8 +27,8 @@ export default class EditIncome extends Component {
   }
 
   handleSubmit = (evt) => {
-    // console.log("Form was submitted");
     evt.preventDefault();
+    // console.log("Form was submitted");
 
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
