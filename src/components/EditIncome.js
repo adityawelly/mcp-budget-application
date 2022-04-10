@@ -1,13 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import Input from './form-components/input';
 import '../App.css';
+import Alert from "./ui-components/Alert";
 
 export default class EditIncome extends Component {
-  // state = {
-  //   income: {},
-  //   isLoaded: false,
-  //   error: null,
-  // }
 
   constructor(props) {
     super(props);
@@ -20,6 +16,10 @@ export default class EditIncome extends Component {
       },
       isLoaded: false,
       error: null,
+      alert: {
+        type: "d-none",
+        message: "",
+      }
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,10 +39,18 @@ export default class EditIncome extends Component {
       body : JSON.stringify(payload)
     }
 
-    fetch('http://localhost:4000/v1/income/editincome', requestOptions)
+    fetch('http://localhost:4000/v1/income/editIncome', requestOptions)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      if (data.error) {
+        this.setState({
+          alert: { type: "alert-danger", message: data.error.message },
+        });
+      } else {
+        this.setState({
+          alert: { type: "alert-success", message: "Changes saved!" },
+        });
+      }
     })
   };
 
@@ -58,48 +66,41 @@ export default class EditIncome extends Component {
   }
 
   componentDidMount() {
-  //   this.setState({
-  //     income: {
-  //       title: "Jajan",
-  //       amount: "20.000",
-  //     }
-  //   })
-
-  const id = this.props.match.params.id;
-  if (id > 0) {
-    fetch("http://localhost:4000/v1/income/" + id)
-      .then((response) => {
-        if (response.status !== "200") {
-          let err = Error;
-          err.Message = "Invalid response code: " + response.status;
-          this.setState({error: err});
-        }
-        return response.json();
-      })
-      .then((json) => {
-        const tanggal = new Date(json.income.tanggal_in);
-
-        this.setState(
-          {
-            income: {
-              id: id,
-              tanggal_in: tanggal.toISOString().split("T")[0],
-              jumlah_in: json.income.jumlah_in,
-              catatan_in: json.income.catatan_in,
-            },
-            isLoaded: true,
-          },
-          (error) => {
-            this.setState({
-              isLoaded: true,
-              error,
-            })
+    const id = this.props.match.params.id;
+    if (id > 0) {
+      fetch("http://localhost:4000/v1/income/" + id)
+        .then((response) => {
+          if (response.status !== "200") {
+            let err = Error;
+            err.Message = "Invalid response code: " + response.status;
+            this.setState({error: err});
           }
-        )
-      })
-  } else {
-    this.setState({ isLoaded: true});
-  }
+          return response.json();
+        })
+        .then((json) => {
+          const tanggal = new Date(json.income.tanggal_in);
+
+          this.setState(
+            {
+              income: {
+                id: id,
+                tanggal_in: tanggal.toISOString().split("T")[0],
+                jumlah_in: json.income.jumlah_in,
+                catatan_in: json.income.catatan_in,
+              },
+              isLoaded: true,
+            },
+            (error) => {
+              this.setState({
+                isLoaded: true,
+                error,
+              })
+            }
+          )
+        })
+    } else {
+      this.setState({ isLoaded: true});
+    }
   }
 
   render() {
@@ -113,7 +114,8 @@ export default class EditIncome extends Component {
 
     return(
       <Fragment>
-        <h1>Add / Edit Income</h1>
+        <h1 className='income'>Add / Edit Income</h1>
+        <Alert alertType={this.state.alert.type} alertMessage={this.state.alert.message} />
         <form onSubmit={this.handleSubmit}>
           <input type="hidden" name='id' id='id' value={income.id} onChange={this.handleChange}/>
           

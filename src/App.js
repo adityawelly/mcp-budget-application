@@ -1,7 +1,5 @@
 import React, {Fragment} from 'react';
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
-// import Income from './components/Income';
-// import Expenses from './components/Expenses';
 import Home from './components/Home';
 import EditIncome from './components/EditIncome';
 import EditExpenses from './components/EditExpenses';

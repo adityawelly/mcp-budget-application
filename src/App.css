@@ -57,15 +57,22 @@ li:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: goldenrod;
+  color: goldenrod
 }
 
 h1 {
   float: left;
   font-size: 40px;
-  border-bottom: 6px solid goldenrod;
   margin-bottom: 50px;
   padding: 13px 0;
+}
+
+.expenses {
+  border-bottom: 6px solid rgb(216, 24, 24);
+}
+
+.income {
+  border-bottom: 6px solid rgb(38, 247, 38);
 }
 
 .textbox {

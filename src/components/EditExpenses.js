@@ -1,13 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import Input from './form-components/input';
 import '../App.css';
+import Alert from "./ui-components/Alert";
 
 export default class EditExpenses extends Component {
-  // state = {
-  //   expenses: {},
-  //   isLoaded: false,
-  //   error: null,
-  // }
 
   constructor(props) {
     super(props);
@@ -20,6 +16,10 @@ export default class EditExpenses extends Component {
       },
       isLoaded: false,
       error: null,
+      alert: {
+        type: "d-none",
+        message: "",
+      }
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,7 +42,15 @@ export default class EditExpenses extends Component {
     fetch('http://localhost:4000/v1/expenses/editExpenses', requestOptions)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      if (data.error) {
+        this.setState({
+          alert: { type: "alert-danger", message: data.error.message },
+        });
+      } else {
+        this.setState({
+          alert: { type: "alert-success", message: "Changes saved!" },
+        });
+      }
     })
   };
 
@@ -113,7 +121,8 @@ export default class EditExpenses extends Component {
 
     return(
       <Fragment>
-        <h1>Add / Edit Expenses</h1>
+        <h1 className='expenses'>Add / Edit Expenses</h1>
+        <Alert alertType={this.state.alert.type} alertMessage={this.state.alert.message} />
         <form onSubmit={this.handleSubmit}>
           <input type="hidden" name='id' id='id' value={expenses.id} onChange={this.handleChange}/>
           

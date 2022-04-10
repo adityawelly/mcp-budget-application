@@ -4,7 +4,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <h2>Home</h2>
+      <h1 className="home">Home</h1>
     );
   }
 }

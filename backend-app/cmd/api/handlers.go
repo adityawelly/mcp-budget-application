@@ -97,10 +97,12 @@ func (app *application) editIncome(w http.ResponseWriter, r *http.Request) {
 	income.CreatedDate = time.Now()
 	income.UpdatedDate = time.Now()
 
-	err = app.models.DB.InsertIncome(income)
-	if err != nil {
-		app.errorJSON(w, err)
-		return
+	if income.ID == 0 {
+		err = app.models.DB.InsertIncome(income)
+		if err != nil {
+			app.errorJSON(w, err)
+			return
+		}
 	}
 
 	ok := jsonResp{
@@ -200,10 +202,12 @@ func (app *application) editExpenses(w http.ResponseWriter, r *http.Request) {
 	expenses.CreatedDate = time.Now()
 	expenses.UpdatedDate = time.Now()
 
-	err = app.models.DB.InsertExpenses(expenses)
-	if err != nil {
-		app.errorJSON(w, err)
-		return
+	if expenses.ID == 0 {
+		err = app.models.DB.InsertExpenses(expenses)
+		if err != nil {
+			app.errorJSON(w, err)
+			return
+		}
 	}
 
 	ok := jsonResp{
